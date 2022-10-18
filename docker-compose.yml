@@ -1,0 +1,22 @@
+version: "1.0"
+services:
+    nginx:
+        build: ./nginx-conf
+        ports:
+            - "8080:80"
+        volumes:
+            - ./app:/var/www/localhost
+            - ./nginx-conf/localhost.conf:/etc/nginx/conf.d/localhost.conf
+        links:
+            - php
+        networks:
+            - internal
+    php:
+        image: php:7.4-fpm-alpine
+        volumes:
+            - ./app:/var/www/localhost
+        networks:
+            - internal
+networks:
+    internal:
+        driver: bridge
