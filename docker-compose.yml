@@ -1,20 +1,23 @@
 version: "1.0"
 services:
     nginx:
-        build: ./nginx-conf
+        container_name: "php-sandbox-nginx"
+        build: ./volumes/nginx
         ports:
             - "8080:80"
         volumes:
-            - ./app:/var/www/localhost
-            - ./nginx-conf/localhost.conf:/etc/nginx/conf.d/localhost.conf
+            - ./var/www:/var/www
+            - ./etc/nginx/conf.d:/etc/nginx/conf.d
         links:
             - php
         networks:
             - internal
     php:
+        container_name: "php-sandbox-php"
+        build: ./volumes/php
         image: php:7.4-fpm-alpine
         volumes:
-            - ./app:/var/www/localhost
+            - ./var/www:/var/www
         networks:
             - internal
 networks:
