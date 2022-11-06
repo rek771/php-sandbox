@@ -1,0 +1,25 @@
+version: "1.0"
+services:
+    nginx:
+        container_name: "php-sandbox-nginx"
+        build: ./volumes/nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./var/www:/var/www
+            - ./etc/nginx/conf.d:/etc/nginx/conf.d
+        links:
+            - php
+        networks:
+            - internal
+    php:
+        container_name: "php-sandbox-php"
+        build: ./volumes/php
+        image: php:7.4-fpm-alpine
+        volumes:
+            - ./var/www:/var/www
+        networks:
+            - internal
+networks:
+    internal:
+        driver: bridge
