@@ -1,2 +1,5 @@
-# php-sandbox
-Песочница для тестирования технологий, связанных на разработке PHP
+#Песочница PHP
+
+Запуск контейнера:\
+`docker-compose build`\
+`docker-compose up`
