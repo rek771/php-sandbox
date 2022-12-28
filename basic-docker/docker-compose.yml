@@ -2,7 +2,7 @@ version: "1.0"
 services:
     nginx:
         container_name: "php-sandbox-nginx"
-        build: ./volumes/nginx
+        build: volumes/nginx
         ports:
             - "8080:80"
         volumes:
@@ -14,7 +14,7 @@ services:
             - internal
     php:
         container_name: "php-sandbox-php"
-        build: ./volumes/php
+        build: volumes/php
         image: php:7.4-fpm-alpine
         volumes:
             - ./var/www:/var/www
